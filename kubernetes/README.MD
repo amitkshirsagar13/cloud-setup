@@ -1,8 +1,10 @@
 
 sudo systemctl disable firewalld iptables iptables-service iptables-services && sudo systemctl stop firewalld iptables iptables-service iptables-services
 
+
+
 sudo vi /etc/ssh/ssh_config
-sudo systemctl enable --now sshd && sudo systemctl restart etcd  
+sudo systemctl enable --now sshd && 
 
 Enable Bridged Adaptor Networking:
 
@@ -11,9 +13,11 @@ kube-master:
 
 Determine what IP want to use for Master:
 192.168.1.150 kube-master
-sudo dnf install cockpit cockpit-ostree cockpit-packagekit cockpit-docker cockpit-machines cockpit-selinux flannel kubernetes docker ntp etcd 
+
+sudo dnf install cockpit cockpit-ostree cockpit-packagekit cockpit-docker cockpit-machines cockpit-selinux cockpit-kubernetes flannel kubernetes docker ntp etcd 
 
 Modify Below Configuration:
+
 sudo vi /etc/etcd/etcd.conf
 ETCD_NAME=default
 ETCD_DATA_DIR="/var/lib/etcd/default.etcd"
@@ -44,8 +48,8 @@ KUBELET_HOSTNAME="--hostname_override=kube-minion1"
 KUBELET_API_SERVER="--api_servers=http://kube-master:8080"
 KUBELET_ARGS=""
 
-sudo systemctl enable --now kube-proxy kubelet docker flanneld ntpd kube-apiserver kube-controller-manager kube-scheduler etcd
-sudo systemctl restart --now kube-proxy kubelet docker flanneld ntpd kube-apiserver kube-controller-manager kube-scheduler etcd
+sudo systemctl enable --now kube-proxy kubelet docker flanneld ntpd kube-apiserver kube-controller-manager kube-scheduler etcd cockpit.socket
+sudo systemctl restart --now kube-proxy kubelet docker flanneld ntpd kube-apiserver kube-controller-manager kube-scheduler etcd cockpit.socket
 
 Kubernetes Minion Node: Setup
 
@@ -54,7 +58,7 @@ We want to distinctly range IP Addresses to allow handling nodes from multiple m
 192.168.1.161 kube-minion2 
 
 
-sudo dnf install cockpit cockpit-ostree cockpit-packagekit cockpit-docker cockpit-machines cockpit-selinux flannel kubernetes docker ntp
+sudo dnf install cockpit cockpit-ostree cockpit-packagekit cockpit-docker cockpit-machines cockpit-selinux cockpit-kubernetes flannel kubernetes docker ntp
 
 
 sudo vi /etc/sysconfig/flanneld
@@ -73,8 +77,8 @@ KUBELET_ARGS=""
 
 
 
-sudo systemctl enable --now kube-proxy kubelet docker flanneld ntpd 
-sudo systemctl restart --now kube-proxy kubelet docker flanneld ntpd 
+sudo systemctl enable --now kube-proxy kubelet docker flanneld ntpd cockpit.socket
+sudo systemctl restart --now kube-proxy kubelet docker flanneld ntpd cockpit.socket
 
 
 

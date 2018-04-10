@@ -11,8 +11,33 @@ Enable Bridged Adaptor Networking:
 Kubernetes Master Node: Setup
 kube-master:
 
+
+
 Determine what IP want to use for Master:
 192.168.1.150 kube-master
+
+[master@localhost ~]$ cat /etc/sysconfig/network-scripts/ifcfg-enp0s8
+TYPE=Ethernet
+BOOTPROTO=static
+NAME=enp0s8
+UUID=3e0f5ae2-7e70-373a-9a41-1512a4b13b7c
+ONBOOT=yes
+AUTOCONNECT_PRIORITY=-999
+DEVICE=enp0s8
+DNS1=8.8.8.8
+DNS2=4.4.4.4
+GATEWAY=192.168.50.1
+HOSTNAME=master.shinigami.io
+IPADDR=192.168.50.100
+NETMASK=255.255.255.0
+NM_CONTROLLED=yes
+ONBOOT=yes
+[master@localhost ~]$
+
+
+
+
+
 
 sudo dnf install cockpit cockpit-ostree cockpit-packagekit cockpit-docker cockpit-machines cockpit-selinux cockpit-kubernetes flannel kubernetes docker ntp etcd 
 

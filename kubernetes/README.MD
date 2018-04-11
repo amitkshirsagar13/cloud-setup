@@ -39,7 +39,7 @@ ONBOOT=yes
 
 
 
-sudo dnf install cockpit cockpit-ostree cockpit-packagekit cockpit-docker cockpit-machines cockpit-selinux cockpit-kubernetes flannel kubernetes docker ntp etcd 
+sudo dnf install cockpit cockpit-packagekit cockpit-docker cockpit-machines cockpit-ostree cockpit-selinux cockpit-kubernetes flannel kubernetes docker ntp etcd 
 
 Modify Below Configuration:
 
